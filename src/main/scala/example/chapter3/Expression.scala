@@ -47,4 +47,3 @@ object Expression extends App {
     y <- 1 to 3
   } println(s"$x $y")
 }
-
