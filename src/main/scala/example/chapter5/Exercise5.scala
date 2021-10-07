@@ -12,7 +12,7 @@ object Exercise5 extends App {
     val max = f(f(a, b), f(b, c))
     if (max > e) max else e
   }
-  println(randomMax(random1, random2, random3, 4, 5)((a, b) => if (a > b) a else b))
+  println(randomMax(random1, random2, random3, 4, 5){ (a, b) => if (a > b) a else b })
 
   def pow(a: Int) = (b: Int) => a * b
   println(pow(2)(4))
