@@ -38,4 +38,45 @@ object AdvancedFunction extends App {
   def factorOf2(x: Int)(y: Int) = y % x == 0
   val isEven = factorOf2(2) _
   println(isEven(32))
+
+  // call by name
+  def doubles(x: => Int) = {
+    x * 2
+  }
+  println(doubles(5))
+  println(doubles(x = 5))
+
+  // partial function
+  val statusHandler: Int => String = {
+    case 200 => "Okay"
+    case 400 => "Your Error"
+    case 500 => "Our Eror"
+  }
+  println(statusHandler(200))
+
+  def safeStringOp2(s: String)(f: String => String) = {
+    if (s != null) f(s) else s
+  }
+
+  val timedUUID = safeStringOp2(java.util.UUID.randomUUID.toString) { s =>
+    val now = System.currentTimeMillis
+    val timed = s.take(24) + now
+    timed.toUpperCase()
+  }
+  println(timedUUID)
+
+  def timer[A](f: => A): A = {
+    def now = System.currentTimeMillis
+    val start = now
+    val a = f
+    val end = now
+    println(s"Executed in ${end - start} ms")
+    a
+  }
+  val veryRandomAmount = timer {
+    util.Random.setSeed(System.currentTimeMillis)
+    for (i <- 1 to 100000) util.Random.nextDouble
+    util.Random.nextDouble
+  }
+  println(veryRandomAmount)
 }
