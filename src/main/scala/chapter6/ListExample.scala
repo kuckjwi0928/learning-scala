@@ -27,5 +27,12 @@ object ListExample {
     val appended = List(1, 2, 3, 4) :+ 5
     println(appended takeRight 3)
     println(appended dropRight 2)
+
+    val statuses = List(200, 404)
+    val msg = statuses.head match {
+      case x if x < 500 => "okay"
+      case _ => "whoah, an error"
+    }
+    println(msg)
   }
 }
